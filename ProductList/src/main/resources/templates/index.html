@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cosmo/bootstrap.min.css" />
+    <script src= "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" ></script>
+</head>
+<body>
+
+<!--uncomment this for the google translation api to use-->
+<!--<div id="google_translate_element"></div>-->
+<!--<script type="text/javascript">-->
+<!--function googleTranslateElementInit() {-->
+<!--  new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');-->
+<!--}-->
+<!--</script>-->
+
+<!--<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>-->
+<style>
+    .container__nav{
+        display : flex;
+        justify-content: flex-end;
+    }
+    .button__container{
+    display : flex;
+    padding:10px;
+    margin: 10px;
+    justify-content: space-between;
+    }
+
+</style>
+<div class="container__nav">
+<div class="nav-item" align="right">
+    <a class="nav-link"th:href="@{?lang=en}">English</a>
+
+</div>
+<div class="nav-item" align="right">
+    <a class="nav-link"th:href="@{?lang=jp}">Japanese</a>
+
+</div>
+</div>
+<div>
+<!--    <h2 >GAT &#45;&#45;&ndash;&gt; Product Management</h2>-->
+    <h2>[[#{app.title}]]</h2>
+    <br><br>
+    <div class="button__container">
+<!--        <h3><a  th:href="@{'/mail'}" >Send Mail</a></h3>-->
+            <h3><button class="btn btn-dark" onclick="window.location.href='/mail'">[[#{button.mail}]]</button>
+            </h3>
+    </div>
+<div class="button__container">
+        <div>
+<!--            <h3><a  th:href="@{'/new'}" >Add new</a></h3>-->
+<!--            <h3><button class="btn btn-dark" onclick="window.location.href='/new'">ADD NEW PRODUCT</button></h3>-->
+            <button class="btn btn-dark" onclick="window.location.href='/new'">[[#{button.addProduct}]]</button>
+        </div>
+
+        <form method="POST" th:action="@{/upload}" enctype="multipart/form-data">
+            <input class="file_container" type="file" name="file" accept=".xlsx"/>
+            <button class="btn btn-dark" type="submit">[[#{button.upload}]]</button>
+        </form>
+<!--    <div class="input-group mb-3 col-md-4">-->
+<!--        <div class="custom-file">-->
+<!--            <input type="file" class="custom-file-input" id="inputGroupFile02">-->
+<!--            <label class="custom-file-label" for="inputGroupFile02">Choose file</label>-->
+<!--        </div>-->
+<!--        <div class="input-group-append">-->
+<!--            <span class="input-group-text" th:action="@{/upload}">Upload</span>-->
+<!--        </div>-->
+<!--    </div>-->
+
+
+
+    <div>
+        <button class="btn btn-dark" onclick="window.location.href='/export'">[[#{button.excel}]]</button>
+    </div>
+</div>
+
+    <br><br>
+    <di>
+
+        <div class="col-md-12" align = "center">
+            <div class="panel-body" align = "center" >
+                <table class="table">
+                    <thead class="thead-dark">
+                    <tr>
+<!--                        <th>Product ID</th>-->
+<!--                        <th>Product Name</th>-->
+<!--                        <th>Description</th>-->
+<!--                        <th>Price</th>-->
+<!--                        <th>Edit</th>-->
+<!--                        <th>Delete</th>-->
+                        <th>[[#{col.product_id}]]</th>
+                        <th>[[#{col.product_name}]]</th>
+                        <th>[[#{col.description}]]</th>
+                        <th>[[#{col.price}]]</th>
+                        <th>[[#{col.edit}]]</th>
+                        <th>[[#{col.delete}]]</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr  th:each="product : ${listproduct }">
+                        <td th:text="${product.id}">product ID</td>
+                        <td th:text="${product.productname}">productName</td>
+                        <td th:text="${product.description}">Description</td>
+                        <td th:text="${product.price}">Price</td>
+                        <td>
+<!--                            <a th:href="@{'/edit/' + ${product.id}}">Edit</a>-->
+                            <a th:href="@{'/edit/' + ${product.id}}">[[#{col.edit}]]</a>
+                        </td>
+                        <td>
+<!--                            <a th:href="@{'/delete/' + ${product.id}}">Delete</a>-->
+                            <a th:href="@{'/delete/' + ${product.id}}">[[#{col.delete}]]</a>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+
+
+    </tr>
+
+    </tbody>
+    </table>
+    </di>
+</div>
+</body>
+</html>

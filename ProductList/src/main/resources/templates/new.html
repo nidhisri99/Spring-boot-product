@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title>Create New Product</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cosmo/bootstrap.min.css" />
+    <script src= "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" ></script>
+</head>
+<body>
+<style>
+    .container__nav{
+        display : flex;
+        justify-content: flex-end;
+    }
+</style>
+<div class="container__nav">
+    <div class="nav-item" align="right">
+        <a class="nav-link"th:href="@{?lang=en}">English</a>
+
+    </div>
+    <div class="nav-item" align="right">
+        <a class="nav-link"th:href="@{?lang=jp}">Japanese</a>
+
+    </div>
+</div>
+<div align="center">
+    <h1>[[#{new.title}]]</h1>
+    <br />
+    <div class="col-sm-4">
+        <form action="#" th:action="@{/save}" th:object="${product}" method="post">
+
+
+            <div alight="left">
+                <tr>
+                    <label class="form-label" >[[#{new.product_name}]]</label>
+                    <td>
+                        <input type="hidden" th:field="*{id}" />
+                        <input type="text" th:field="*{productname}" class="form-control" placeholder="Product Name 商品名" />
+                    </td>
+                </tr>
+            </div>
+
+            <div alight="left">
+
+                <tr>
+                    <label class="form-label" >[[#{new.description}]]</label>
+                    <td><input type="text" th:field="*{description}" class="form-control" placeholder="Description  説明" /></td>
+                </tr>
+            </div>
+            <div alight="left">
+                <tr>
+                    <label class="form-label" >[[#{new.price}]]</label>
+                    <td><input type="text" th:field="*{price}" class="form-control" placeholder="Price   価格" /></td>
+                </tr>
+            </div>
+            <br>
+            <tr>
+                <td colspan="2"><button type="submit" class="btn btn-dark">[[#{new.save}]]</button> </td>
+            </tr>
+            </table>
+        </form>
+    </div>
+</div>
+</body>
+</html>
